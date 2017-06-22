@@ -11,7 +11,7 @@ uniform vec3 uDiffuseLight; //cor da luz difusa
 uniform vec3 uSpecularLight;    //cor da luz especular
 
 //Propriedades da luz direcional
-uniform vec3 uLightDir; //direção da luz difusa
+//uniform vec3 uLightDir; //direção da luz difusa
 
 //Propriedades da luz posicional
 uniform vec3 uLightPos; //posição da luz

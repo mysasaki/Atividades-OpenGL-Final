@@ -2,31 +2,29 @@
 
 in vec3 vNormal;
 in vec3 vViewPath;
-in vec3 aFragPos;
-out vec4 outColor;
+out vec4 outColor; //cor da luz ambiente
 
-//Propriedades da luz
-uniform vec3 uAmbientLight; //cor da luz ambiente
-uniform vec3 uDiffuseLight; //cor da luz difusa
-uniform vec3 uSpecularLight;    //cor da luz especular
+uniform vec3 uAmbientLight; //cor da luz difusa
+uniform vec3 uDiffuseLight; //direção da luz difusa
+uniform vec3 uSpecularLight; //Cor do material ambiente
 
-//Propriedades da luz direcional
-uniform vec3 uLightDir; //direção da luz difusa
+// Propriedade da luz direcional
+uniform vec3 uLightDir;
 
+uniform vec3 uAmbientMaterial; //direção do material difusa
+uniform vec3 uDiffuseMaterial; //cor da luz especular
+uniform vec3 uSpecularMaterial;
 
-//Propriedades do material
-uniform vec3 uAmbientMaterial;  //cor do ambientMaterial
-uniform vec3 uDiffuseMaterial;  //direção do diffuseMaterial
-uniform vec3 uSpecularMaterial;     //cor da luz especular
-uniform float uSpecularPower;   //intensidade do material quanto a luz especular
+//Sensibilidade do material a luz especular
+uniform float uSpecularPower;
 
 
 void main() {
     vec3 N = normalize(vNormal);
-    vec3 L = normalize(vViewPath);
+    vec3 L = normalize(uLightDir);
 
     //Calculo do componente ambiente
-    vec3 ambient = uAmbientLight + uAmbientMaterial;
+    vec3 ambient = uAmbientLight * uAmbientMaterial;
 
     //Calcula o componente difuso
     float intensity = dot(N, -L); // cosseno entre os vetores normalizados N e L
@@ -37,10 +35,9 @@ void main() {
     if(uSpecularPower > 0.0){
         vec3 V = normalize(vViewPath);
         vec3 R = reflect(L, N);
-        specularIntensity = pow(max(dot(V, R), 0.0), uSpecularPower);
+        specularIntensity = pow(max(dot(R, V), 0.0), uSpecularPower);
     }
     vec3 specular = specularIntensity * uSpecularLight * uSpecularMaterial;
-
     //Combina os componentes
     vec3 color = clamp(ambient + diffuse + specular, 0.0, 1.0);
     outColor = vec4(color, 1.0f);

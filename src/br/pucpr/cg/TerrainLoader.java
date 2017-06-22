@@ -78,6 +78,9 @@ public class TerrainLoader implements Scene{
          * COMO NÃO FOI INFORMADO, TOMEI A LIBERDADE DE ATRIBUIR AS TECLAS W e S A MOVIMENTAÇÃO PARA FRENTE E PARA TRÁS.
          *
          */
+        /*if (keys.isPressed(GLFW_KEY_H)) {
+
+        }*/
 
         if (keys.isDown(GLFW_KEY_W)) {
             camera.moveFront(speed * secs);

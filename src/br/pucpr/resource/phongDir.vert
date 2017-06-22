@@ -15,7 +15,7 @@ out vec3 aFragPos;
 void main() {
     vec4 worldPos = uWorld * vec4(aPosition, 1.0);
     gl_Position =  uProjection * uView * worldPos;
-    vNormal = (uWorld * vec4(aNormal, 0)).xyz;
+    vNormal = (uWorld * vec4(aNormal, 0.0)).xyz;
     vViewPath = uCameraPosition - worldPos.xyz;
     aFragPos = worldPos.xyz;
     //    gl_Position =  uProjection * uView * uWorld * vec4(aPosition, 1.0);
