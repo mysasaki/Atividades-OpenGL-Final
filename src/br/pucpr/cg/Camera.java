@@ -39,8 +39,8 @@ public class Camera {
     }
 
     public void rotateX (float angle) {
-        Vector3f vector = new Vector3f(direction).cross(up).normalize().mul(angle);
-        new Matrix3f().rotateXYZ(vector.x, vector.y, vector.z).transform(direction);
+            Vector3f vector = new Vector3f(direction).cross(up).normalize().mul(angle);
+            new Matrix3f().rotateXYZ(vector.x, vector.y, vector.z).transform(direction);
     }
 
     public void rotate (float angle) {
