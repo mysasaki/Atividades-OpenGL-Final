@@ -66,7 +66,6 @@ public class TerrainLoader implements Scene{
     public void update(float secs) {
         float rotateSpeed = 75.0f;
         float speed = 100.0f;
-
         if (keys.isPressed(GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(glfwGetCurrentContext(), GLFW_TRUE);
             return;
@@ -119,7 +118,6 @@ public class TerrainLoader implements Scene{
     @Override
     public void draw() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         Shader shader = mesh.getShader();
         shader.bind()
                 .setUniform("uProjection", camera.getProjectionMatrix())

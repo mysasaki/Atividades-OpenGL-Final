@@ -47,13 +47,15 @@ public class TerrainPerlinNoise implements Scene{
     private int width;
     private int height;
 
+    private boolean wireFrame;  //true =  wirefram, false =  fill
+
     @Override
     public void init() {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        glPolygonMode(GL_FRONT_FACE, GL_LINE);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+        wireFrame = false;
         width = 500;
         height = 500;
         noise = new Noise(width, height, 0);
@@ -85,7 +87,6 @@ public class TerrainPerlinNoise implements Scene{
          * TDE: PERMITE O USUARIO SE MOVER NA CENA
          *
          */
-
         if (keys.isDown(GLFW_KEY_W)) {
             camera.moveFront(speed * secs);
         }
@@ -102,6 +103,9 @@ public class TerrainPerlinNoise implements Scene{
             camera.strafeLeft(speed * secs);
         }
 
+        /**
+         * ROTAÇAO DA CAMERA
+         */
         if (keys.isDown(GLFW_KEY_LEFT)) {
             camera.rotate((float) Math.toRadians(rotateSpeed) * secs);
         }
@@ -118,6 +122,9 @@ public class TerrainPerlinNoise implements Scene{
             camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs, 1);
         }
 
+        /**
+         * TECLAS PARA AUMENTAR E DIMINUIR O TERRENO
+         */
         if (keys.isPressed(GLFW_KEY_L)) {
             terrainValue += 0.1;
         }
@@ -126,11 +133,28 @@ public class TerrainPerlinNoise implements Scene{
             if (terrainValue - 0.1f >= 0)
                 terrainValue -= 0.1f;
         }
+
+        /**
+         * ATIVA E DESATIVA O WIFEFRAME
+         */
+        if (keys.isPressed(GLFW_KEY_P)) {
+            wireFrame = !wireFrame;
+        }
     }
 
     @Override
     public void draw() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+        /**
+         * DESENHA O TERRENO COM OU SEM WIREFRAMA
+         */
+        if (wireFrame)
+            glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+        else
+            glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
 
         Shader shader = mesh.getShader();
         shader.bind()
