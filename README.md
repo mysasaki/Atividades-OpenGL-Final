@@ -1,7 +1,7 @@
 
 # Projetos de OpenGL
 
-O projeto contem as atividades e TDE da segunda parcial da disciplina Programação de Jogos 3D
+O projeto contém as atividades e TDE da segunda parcial da disciplina Programação de Jogos 3D
 
 
 ### Atividades
