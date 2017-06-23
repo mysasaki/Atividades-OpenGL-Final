@@ -66,27 +66,27 @@ public class Noise {
 
         for (int i = 0; i < width; i++)
         {
-            //calculate the horizontal sampling indices
+            //calcula os indices da amostra horizontal
             int i0 = (i / samplePeriod) * samplePeriod;
             int i1 = (i0 + samplePeriod) % width; //wrap around
             float horizontal_blend = (i - i0) * sampleFrequency;
 
             for (int j = 0; j < height; j++)
             {
-                //calculate the vertical sampling indices
+                //calcula os indices da amostra vertical
                 int j0 = (j / samplePeriod) * samplePeriod;
                 int j1 = (j0 + samplePeriod) % height; //wrap around
                 float vertical_blend = (j - j0) * sampleFrequency;
 
-                //blend the top two corners
+                //mistura os dois cantos superiores
                 float top = Interpolate(baseNoise[i0][j0],
                         baseNoise[i1][j0], horizontal_blend);
 
-                //blend the bottom two corners
+                //mistura os dois cantos inferiores
                 float bottom = Interpolate(baseNoise[i0][j1],
                         baseNoise[i1][j1], horizontal_blend);
 
-                //final blend
+                //mistura
                 smoothNoise[i][j] = Interpolate(top, bottom, vertical_blend);
             }
         }
@@ -101,7 +101,7 @@ public class Noise {
 
         float[][][] smoothNoise = new float[octaveCount][][]; //an array of 2D arrays containing
 
-        float persistance = 0.5f;
+        float persistance = 0.4f;
 
         //generate smooth noise
         for (int i = 0; i < octaveCount; i++)
