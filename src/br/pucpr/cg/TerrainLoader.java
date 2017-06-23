@@ -107,11 +107,11 @@ public class TerrainLoader implements Scene{
         }
 
         if (keys.isDown(GLFW_KEY_UP)) {
-            camera.rotateX((float) Math.toRadians(rotateSpeed) * secs);//moveUp(speed * secs);
+            camera.rotateX((float) Math.toRadians(rotateSpeed) * secs, 0);//moveUp(speed * secs);
         }
 
         if (keys.isDown(GLFW_KEY_DOWN)) {
-            camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs);
+            camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs, 1);
         }
 
     }

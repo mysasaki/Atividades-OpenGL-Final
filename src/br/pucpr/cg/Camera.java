@@ -20,6 +20,8 @@ public class Camera {
     private float near = 0.1f;
     private float far = 1000.0f;
 
+    private float totalAngle = 0.0f;
+
     public void moveFront(float distance) {
         position.add(new Vector3f(direction).normalize().mul(distance));
     }
@@ -38,9 +40,26 @@ public class Camera {
 
     }
 
-    public void rotateX (float angle) {
-            Vector3f vector = new Vector3f(direction).cross(up).normalize().mul(angle);
-            new Matrix3f().rotateXYZ(vector.x, vector.y, vector.z).transform(direction);
+    public void rotateX (float angle, int dir) {  //dir 0 -> up, 1 -> down
+        if (dir == 0) {   //look up
+            if (totalAngle + angle <= 1.0f) {
+                Vector3f vector = new Vector3f(direction).cross(up).normalize().mul(angle);
+                new Matrix3f().rotateXYZ(vector.x, vector.y, vector.z).transform(direction);
+                totalAngle += angle;
+                System.out.println("up");
+                System.out.println(totalAngle);
+            }
+
+        }
+        else if (dir == 1) {    //look down
+            if (totalAngle - angle >= -0.7f) {
+                Vector3f vector = new Vector3f(direction).cross(up).normalize().mul(angle);
+                new Matrix3f().rotateXYZ(vector.x, vector.y, vector.z).transform(direction);
+                totalAngle += angle;
+                System.out.println("down");
+                System.out.println(totalAngle);
+            }
+        }
     }
 
     public void rotate (float angle) {

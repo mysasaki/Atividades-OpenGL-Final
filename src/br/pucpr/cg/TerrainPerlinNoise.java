@@ -111,11 +111,11 @@ public class TerrainPerlinNoise implements Scene{
         }
 
         if (keys.isDown(GLFW_KEY_UP)) {
-            camera.rotateX((float) Math.toRadians(rotateSpeed) * secs);//moveUp(speed * secs);
+            camera.rotateX((float) Math.toRadians(rotateSpeed) * secs, 0);//moveUp(speed * secs);
         }
 
         if (keys.isDown(GLFW_KEY_DOWN)) {
-            camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs);
+            camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs, 1);
         }
 
         if (keys.isPressed(GLFW_KEY_L)) {
