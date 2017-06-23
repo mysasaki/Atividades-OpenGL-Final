@@ -79,12 +79,10 @@ public class Noise {
                 float vertical_blend = (j - j0) * sampleFrequency;
 
                 //mistura os dois cantos superiores
-                float top = Interpolate(baseNoise[i0][j0],
-                        baseNoise[i1][j0], horizontal_blend);
+                float top = Interpolate(baseNoise[i0][j0], baseNoise[i1][j0], horizontal_blend);
 
                 //mistura os dois cantos inferiores
-                float bottom = Interpolate(baseNoise[i0][j1],
-                        baseNoise[i1][j1], horizontal_blend);
+                float bottom = Interpolate(baseNoise[i0][j1], baseNoise[i1][j1], horizontal_blend);
 
                 //mistura
                 smoothNoise[i][j] = Interpolate(top, bottom, vertical_blend);

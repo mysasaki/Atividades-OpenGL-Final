@@ -41,6 +41,8 @@ public class TerrainPerlinNoise implements Scene{
     private float angleX = 0.0f;
     private float angleY = 0.5f;
 
+    private float terrainValue;
+
     private Noise noise;
     private int width;
     private int height;
@@ -55,6 +57,7 @@ public class TerrainPerlinNoise implements Scene{
         width = 500;
         height = 500;
         noise = new Noise(width, height, 0);
+        terrainValue = 1.0f;
 
         try {
             mesh = MeshFactory.loadTerrain(noise.GetNoise(), 100.0f);
@@ -115,6 +118,14 @@ public class TerrainPerlinNoise implements Scene{
             camera.rotateX(-(float) Math.toRadians(rotateSpeed) * secs);
         }
 
+        if (keys.isPressed(GLFW_KEY_L)) {
+            terrainValue += 0.1;
+        }
+
+        if (keys.isPressed(GLFW_KEY_K)) {
+            if (terrainValue - 0.1f >= 0)
+                terrainValue -= 0.1f;
+        }
     }
 
     @Override
@@ -125,7 +136,8 @@ public class TerrainPerlinNoise implements Scene{
         shader.bind()
                 .setUniform("uProjection", camera.getProjectionMatrix())
                 .setUniform("uView", camera.getViewMatrix())
-                .setUniform("uCameraPosition", camera.getPosition());
+                .setUniform("uCameraPosition", camera.getPosition())
+                .setUniform("aValue", terrainValue);
 
         light.apply(shader);
         material.apply(shader);

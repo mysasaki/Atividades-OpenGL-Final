@@ -7,7 +7,7 @@ uniform vec3 uCameraPosition;
 
 in vec3 aPosition;
 in vec3 aNormal;
-uniform float aValue;
+
 
 
 out vec3 vNormal;
@@ -15,7 +15,7 @@ out vec3 vViewPath;
 out vec3 aFragPos;
 
 void main() {
-    vec4 worldPos = uWorld * vec4(aPosition.x, aPosition.y * aValue, aPosition.z, 1.0);
+    vec4 worldPos = uWorld * vec4(aPosition.x, aPosition.y, aPosition.z, 1.0);
     gl_Position =  uProjection * uView * worldPos * vec4(1.0, 1.0, 1.0, 1.0);
     vNormal = (uWorld * vec4(aNormal, 0.0)).xyz;
     vViewPath = uCameraPosition - worldPos.xyz;

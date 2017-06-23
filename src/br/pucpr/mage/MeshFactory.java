@@ -86,7 +86,7 @@ public class MeshFactory  {
                 .addVector3fAttribute("aPosition", positions)
                 .addVector3fAttribute("aNormal", normals)
                 .setIndexBuffer(indices)
-                .loadShader("/br/pucpr/resource/phongDir")
+                .loadShader("/br/pucpr/resource/directional")
                 .create();
     }
 
