@@ -4,6 +4,9 @@ import org.joml.Vector3f;
 
 import br.pucpr.mage.Shader;
 
+/**
+ * CLASSE CRIADA EM SALA E USADA PARA TESTAR
+ */
 public class DirectionalLight {
     private Vector3f direction;
     private Vector3f ambient;
