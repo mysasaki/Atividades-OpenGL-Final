@@ -52,7 +52,7 @@ public class TerrainLoader implements Scene{
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         try {
-            mesh = MeshFactory.loadTerrain(new File("C:/Users/Mylla/Documents/_PUCPR/3_SEMESTRE/PROG_3D/OpenGL/opengl/heights/volcano.png"), 0.5f);
+            mesh = MeshFactory.loadTerrain(new File("C:/Users/Mylla/Documents/_PUCPR/3_SEMESTRE/PROG_3D/OpenGL/opengl/heights/mountains.png"), 0.5f);
             System.out.println("ok!");
         } catch (IOException e){
             e.printStackTrace();

@@ -6,8 +6,8 @@ import br.pucpr.mage.phong.Material;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
@@ -21,6 +21,8 @@ import static org.lwjgl.opengl.GL11.*;
  * O TERRENO TAMBEM CONSTA TEXTURA COMO EXIGIDO NA ATIVIDADE.
  */
 public class TerrainPerlinNoise implements Scene{
+    Scanner scanner = new Scanner(new File("DATA.txt"));
+
     private Keyboard keys = Keyboard.getInstance();
     private static final String PATH = "C:/Users/Mylla/Documents/_PUCPR/3_SEMESTRE/PROG_3D/OpenGL/opengl/textures/";
 
@@ -46,19 +48,31 @@ public class TerrainPerlinNoise implements Scene{
     private Noise noise;
     private int width;
     private int height;
+    private int[] input = new int[3];
 
     private boolean wireFrame;  //true =  wirefram, false =  fill
 
+    public TerrainPerlinNoise() throws FileNotFoundException {
+    }
+
     @Override
     public void init() {
+        //LE ARQUIVO
+        int i = 0;
+        while (scanner.hasNextInt())
+        {
+            input[i++] = scanner.nextInt();
+        }
+
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         wireFrame = false;
-        width = 500;
-        height = 500;
-        noise = new Noise(width, height, 0);
+
+        width = input[0];
+        height = input[1];
+        noise = new Noise(width, height, input[2]);
         terrainValue = 1.0f;
 
         try {
@@ -180,7 +194,7 @@ public class TerrainPerlinNoise implements Scene{
 
     public void deinit() {}
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new Window(new TerrainPerlinNoise(), "Terrain", 1024,768).show();
     }
 
