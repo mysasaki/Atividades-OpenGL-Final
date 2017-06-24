@@ -24,7 +24,7 @@ public class TerrainPerlinNoise implements Scene{
     Scanner scanner = new Scanner(new File("DATA.txt"));
 
     private Keyboard keys = Keyboard.getInstance();
-    private static final String PATH = "C:/Users/Mylla/Documents/_PUCPR/3_SEMESTRE/PROG_3D/OpenGL/opengl/textures/";
+    private static final String PATH = "C:\\Users\\maiki\\Pictures\\img\\opengl\\textures\\";
 
     //Dados da cena
     private Camera camera = new Camera();
@@ -90,13 +90,14 @@ public class TerrainPerlinNoise implements Scene{
                 1000.0f  //specular power
         );
         material.setTexture("uTexture", new Texture(PATH + "grass.png"));
-        camera.getPosition().y = 200.0f;
-        camera.getPosition().z = 200.0f;
+        camera.getPosition().y = 500.5f;
+        camera.getPosition().z = 300.5f;
+        camera.getPosition().x = 5.5f;
     }
 
     @Override
     public void update(float secs) {
-        float rotateSpeed = 75.0f;
+        float rotateSpeed = 30.0f;
         float speed = 100.0f;
 
         if (keys.isPressed(GLFW_KEY_ESCAPE)) {

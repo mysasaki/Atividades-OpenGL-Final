@@ -9,5 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lwjgl" level="project" />
     <orderEntry type="library" name="joml" level="project" />
+    <orderEntry type="library" name="joml1" level="project" />
+    <orderEntry type="library" name="jar" level="project" />
   </component>
 </module>
