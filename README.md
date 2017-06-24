@@ -20,8 +20,12 @@ As atividades são compiladas nas respectivas classes.
 O TDE consiste nas seguintes classes:
 * TerrainPerlinNoise.java (compilável)
 * Noise.java
+* Texture.java
+* TextureAttributes.java
+* Camera.java
 * PhongDir.frag
 * PhingDir.vert
+e as classes bases dadas em aula (que foram modificadas para atender o TDE).
 
 ### Controles
 
