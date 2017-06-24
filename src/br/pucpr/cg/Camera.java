@@ -1,5 +1,10 @@
 package br.pucpr.cg;
 
+/**
+ * Created by Mylla on 13/06/2017.
+ * CLASSE CAMERA CRIADA EM AULA E ADAPTADA PARA O TDE
+ */
+
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;

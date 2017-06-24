@@ -16,9 +16,13 @@ import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Created by Mylla on 22/06/2017.
+ * TDE E TRABALHO: CONSTRUA UM TERRENO DINAMICAMENTE.
+ * UTILIZAMOS A CLASSE NOISE PARA CRIAR UM ARRAY GERADO COM PERLIN NOISE
+ * O TERRENO TAMBEM CONSTA TEXTURA COMO EXIGIDO NA ATIVIDADE.
  */
 public class TerrainPerlinNoise implements Scene{
     private Keyboard keys = Keyboard.getInstance();
+    private static final String PATH = "C:/Users/Mylla/Documents/_PUCPR/3_SEMESTRE/PROG_3D/OpenGL/opengl/textures/";
 
     //Dados da cena
     private Camera camera = new Camera();
@@ -29,14 +33,10 @@ public class TerrainPerlinNoise implements Scene{
             new Vector3f(1.0f, 1.0f, 1.0f)  //specular
     );
 
+
     //Dados da malha
     private Mesh mesh;
-    private Material material = new Material(
-            new Vector3f(1.0f, 1.0f, 1.0f), //ambient
-            new Vector3f(0.7f, 0.7f, 0.7f), //diffuse
-            new Vector3f(1.0f, 1.0f, 1.0f), //specular
-            1000.0f  //specular power
-    );
+    private Material material;
 
     private float angleX = 0.0f;
     private float angleY = 0.5f;
@@ -69,6 +69,13 @@ public class TerrainPerlinNoise implements Scene{
             System.exit(1);
         }
 
+        material = new Material(
+                new Vector3f(1.0f, 1.0f, 1.0f), //ambient
+                new Vector3f(0.7f, 0.7f, 0.7f), //diffuse
+                new Vector3f(0.1f, 0.1f, 0.1f), //specular
+                1000.0f  //specular power
+        );
+        material.setTexture("uTexture", new Texture(PATH + "grass.png"));
         camera.getPosition().y = 200.0f;
         camera.getPosition().z = 200.0f;
     }

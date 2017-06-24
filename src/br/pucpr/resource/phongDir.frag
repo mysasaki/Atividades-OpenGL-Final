@@ -1,8 +1,5 @@
 #version 330
 
-in vec3 vNormal;
-in vec3 vViewPath;
-out vec4 outColor; //cor da luz ambiente
 
 uniform vec3 uAmbientLight; //cor da luz difusa
 uniform vec3 uDiffuseLight; //direção da luz difusa
@@ -17,6 +14,15 @@ uniform vec3 uSpecularMaterial;
 
 //Sensibilidade do material a luz especular
 uniform float uSpecularPower;
+
+//texturas
+uniform sampler2D uTexture;
+
+in vec3 vNormal;
+in vec3 vViewPath;
+in vec2 vTexCoord;
+
+out vec4 outColor; //cor da luz ambiente
 
 
 void main() {
@@ -38,7 +44,10 @@ void main() {
         specularIntensity = pow(max(dot(R, V), 0.0), uSpecularPower);
     }
     vec3 specular = specularIntensity * uSpecularLight * uSpecularMaterial;
+
+    //Calcula textura
+    vec4 texel = texture(uTexture, vTexCoord);
     //Combina os componentes
-    vec3 color = clamp(ambient + diffuse + specular, 0.0, 1.0);
-    outColor = vec4(color, 1.0f);
+    vec3 color = clamp(texel.rgb * (ambient + diffuse) + specular, 0.0, 1.0);
+    outColor = vec4(color, texel.a);
 }

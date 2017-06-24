@@ -14,7 +14,9 @@ import org.lwjgl.BufferUtils;
 import br.pucpr.mage.Keyboard;
 import br.pucpr.mage.Scene;
 import br.pucpr.mage.Window;
+
 /**
+ * CLASSE CRIADA EM AULA E ADAPTADA PARA EXERCICIOS
  * ATIVIDADE 4:
  * ALTERE O CÓDIGO PARA DESENHAR UM PENTAGONO.
  * OBSERVE QUE O PENTÁGONO É FORMADO POR 3 TRIANGULOS

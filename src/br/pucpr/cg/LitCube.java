@@ -14,7 +14,8 @@ import org.joml.Vector3f;
 import java.awt.*;
 
 /**
- * CLASSE CRIADA PARA TESTAR A LUZ POSICIONAL (POINT LIGHT) DO EXERCICIO 8
+ * Created by Mylla on 22/06/2017.
+ * CLASSE LITCUBE CRIADA EM AULA E ADAPTADA PARA TESTAR A LUZ POSICIONAL (POINT LIGHT) DO EXERCICIO 8
  */
 
 public class LitCube implements Scene {

@@ -14,6 +14,7 @@ import java.io.IOException;
 
 
 /**
+ *
  * ATIVIDADE 6: CRIE UMA TERRAINLOADER QUE CARREGUE UMA DAS IMAGENS DA PASTA "img/terrain" NA FORMA DE UM TERRENO 3D.
  *
  * A ATIVIDAE 7 TAMBÉM SE ENCONTRA NESTE MESMO PROJETO.
@@ -66,6 +67,7 @@ public class TerrainLoader implements Scene{
     public void update(float secs) {
         float rotateSpeed = 75.0f;
         float speed = 100.0f;
+
         if (keys.isPressed(GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(glfwGetCurrentContext(), GLFW_TRUE);
             return;

@@ -1,14 +1,30 @@
 package br.pucpr.mage.phong;
 
+import br.pucpr.mage.Texture;
 import org.joml.Vector3f;
 
 import br.pucpr.mage.Shader;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
+
+/**
+ * CLASSE MATERIAL UTILIZADA EM SALA E ADAPTADA PARA O TDE
+ */
 public class Material {
     private Vector3f ambientColor;
     private Vector3f diffuseColor;
     private Vector3f specularColor;
     private float specularPower;
+
+    /**
+     * TDE TEXTURAS
+     * CRIA UM MAP PARA ARMAZENAR TEXTURAS
+     */
+    private Map<String, Texture> textures = new HashMap<>();
 
     public Material(Vector3f ambientColor, Vector3f diffuseColor, Vector3f specularColor, float specularPower) {
         super();
@@ -18,10 +34,7 @@ public class Material {
         this.specularPower = specularPower;
     }
     public void setDiffuse() {
-        //ambientColor = new Vector3f(0.8f, 0.0f, 0.8f);
         diffuseColor = new Vector3f(0.80f, 0.0f, 0.80f);
-        //specularColor = new Vector3f(1.0f, 1.0f, 1.0f);
-        //specularPower = 128f;
     }
 
     public Material(Vector3f ambient, Vector3f diffuse) {
@@ -53,10 +66,28 @@ public class Material {
         this.specularPower = specularPower;
     }
 
+    public Material setTexture(String name, Texture texture) {
+        if (texture == null) {
+            textures.remove(name);
+        } else {
+            textures.put(name, texture);
+        }
+        return this;
+    }
+
     public void apply(Shader shader) {
         shader.setUniform("uAmbientMaterial", ambientColor);
         shader.setUniform("uDiffuseMaterial", diffuseColor);
         shader.setUniform("uSpecularMaterial", specularColor);
         shader.setUniform("uSpecularPower", specularPower);
+
+        int texCount = 0;
+        for (Map.Entry<String, Texture> entry : textures.entrySet()) {
+            glActiveTexture(GL_TEXTURE0 + texCount);
+            entry.getValue().bind();
+            shader.setUniform(entry.getKey(), texCount);
+            texCount = texCount + 1;
+        }
     }
+
 }

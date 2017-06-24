@@ -1,5 +1,6 @@
 package br.pucpr.mage;
 
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import javax.imageio.ImageIO;
@@ -12,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Mylla on 19/06/2017.
+ * CLASSE MESHFACTORY CRIADA EM AULA E ADAPTADA PARA O TDE
  */
 public class MeshFactory  {
     public static Mesh loadTerrain(File file, float scale) throws IOException {
@@ -90,11 +92,13 @@ public class MeshFactory  {
                 .create();
     }
 
+    //Cria o terreno com Perlin Noise
     public static Mesh loadTerrain(float[][] value, float scale) throws IOException {
         int width = value.length;
         int depth = value[0].length;
 
-        float hw = width / 2.0f; //Deixa o terreno centralizado
+        //Deixa o terreno centralizado
+        float hw = width / 2.0f;
         float hd = depth / 2.0f;
 
         // Criação dos vértices
@@ -102,8 +106,25 @@ public class MeshFactory  {
         for (int z = 0; z < depth; z++) {
             for (int x = 0; x < width; x++) {
                 float tone = value[x][z];
-                System.out.println(tone);
                 positions.add(new Vector3f(x - hw, tone * scale, z - hd));
+            }
+        }
+
+        /**
+         * TDE TEXTURA
+         * VAI DIVIDIR 1.0 PELA CONSTANTE WIDTH * 10 PARA ASSIM APLICAR A TEXTURA. LEVANDO EM CONSIDERAÇÃO QUE A TEXTURA VARIA DE 0.0 A 1.0
+         */
+        float factorX = 1.0f / width * 10;
+        float factorY = 1.0f / depth * 10;
+
+        /**
+         * TDE TEXTURA
+         * CRIAÇÃO DAS COORDENADAS DA TEXTURA, PARA ASSIM SEREM PASSADAS PRO SAHDER
+         */
+        List<Vector2f> coordinates = new ArrayList<>();
+        for (int y = 0; y < depth; y++){
+            for (int x = 0; x < width; x++) {
+                coordinates.add(new Vector2f(x * factorX, y * factorY));
             }
         }
 
@@ -160,6 +181,7 @@ public class MeshFactory  {
         return new MeshBuilder()
                 .addVector3fAttribute("aPosition", positions)
                 .addVector3fAttribute("aNormal", normals)
+                .addVector2fAttribute("aTexCoord", coordinates)
                 .setIndexBuffer(indices)
                 .loadShader("/br/pucpr/resource/phongDir")
                 .create();
